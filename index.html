@@ -1,0 +1,678 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Studora | Student Management System</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+:root {
+    --primary: #6558e8;
+    --dark: #171b35;
+    --muted: #68708a;
+    --bg: #f6f7fc;
+    --white: #ffffff;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--bg);
+    color: var(--dark);
+    line-height: 1.6;
+}
+
+nav {
+    background: white;
+    padding: 17px 8%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    box-shadow: 0 3px 20px #171b350a;
+}
+
+.logo {
+    font-size: 25px;
+    font-weight: 800;
+    color: var(--primary);
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--dark);
+    margin-left: 22px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+nav a:hover {
+    color: var(--primary);
+}
+
+.hero {
+    padding: 90px 8%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 45px;
+    background: linear-gradient(120deg, #f6f7ff, #eeebff);
+}
+
+.hero-content {
+    max-width: 600px;
+}
+
+.tag {
+    display: inline-block;
+    background: #e4e0ff;
+    color: #5143d2;
+    padding: 7px 15px;
+    border-radius: 30px;
+    font-size: 13px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-size: clamp(36px, 5vw, 58px);
+    line-height: 1.15;
+    margin-bottom: 22px;
+}
+
+h1 span {
+    color: var(--primary);
+}
+
+.hero p {
+    color: var(--muted);
+    font-size: 16px;
+    margin-bottom: 28px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 13px 22px;
+    background: var(--primary);
+    color: white;
+    text-decoration: none;
+    border-radius: 9px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.btn:hover {
+    background: #5043d0;
+}
+
+.btn-outline {
+    background: white;
+    color: var(--primary);
+    border: 1px solid #ddd9ff;
+    margin-left: 10px;
+}
+
+.preview {
+    background: white;
+    padding: 25px;
+    border-radius: 18px;
+    width: 380px;
+    max-width: 100%;
+    box-shadow: 0 20px 60px #30277a17;
+}
+
+.preview h3 {
+    margin-bottom: 18px;
+}
+
+.stat {
+    display: inline-block;
+    background: #f5f3ff;
+    padding: 15px;
+    border-radius: 10px;
+    width: 47%;
+    margin: 1%;
+}
+
+.stat strong {
+    display: block;
+    font-size: 26px;
+    color: var(--primary);
+}
+
+.stat small {
+    color: var(--muted);
+}
+
+section {
+    padding: 75px 8%;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.section-title h2 {
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+.section-title p {
+    color: var(--muted);
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+}
+
+.card {
+    padding: 27px;
+    background: white;
+    border: 1px solid #ececf5;
+    border-radius: 15px;
+    transition: 0.25s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px #171b350d;
+}
+
+.card .icon {
+    font-size: 30px;
+    margin-bottom: 12px;
+}
+
+.card h3 {
+    margin-bottom: 9px;
+}
+
+.card p {
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.demo {
+    background: white;
+}
+
+.dashboard {
+    background: #fff;
+    border: 1px solid #e9eaf2;
+    border-radius: 15px;
+    padding: 25px;
+    overflow: hidden;
+}
+
+.dashboard-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+input {
+    padding: 12px;
+    border: 1px solid #dedfea;
+    border-radius: 8px;
+    outline: none;
+    font: inherit;
+    max-width: 100%;
+}
+
+input:focus {
+    border-color: var(--primary);
+}
+
+.search {
+    width: 250px;
+}
+
+.table-wrap {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 550px;
+}
+
+th, td {
+    text-align: left;
+    padding: 14px 12px;
+    border-bottom: 1px solid #eeeeF5;
+    font-size: 14px;
+}
+
+th {
+    background: #f7f7fc;
+    color: #565d76;
+}
+
+.status {
+    background: #e0f7e9;
+    color: #18834a;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+}
+
+.tech {
+    background: #f6f7fc;
+}
+
+.tech-list {
+    display: flex;
+    justify-content: center;
+    gap: 13px;
+    flex-wrap: wrap;
+}
+
+.tech-item {
+    padding: 13px 20px;
+    background: white;
+    border: 1px solid #e8e7f3;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+.about {
+    max-width: 800px;
+    margin: auto;
+    text-align: center;
+}
+
+.about p {
+    color: var(--muted);
+    margin: 15px 0;
+}
+
+.contact {
+    text-align: center;
+    background: var(--dark);
+    color: white;
+}
+
+.contact p {
+    color: #c7c9da;
+    margin: 15px 0 25px;
+}
+
+footer {
+    background: #101329;
+    color: #c7c9da;
+    text-align: center;
+    padding: 20px;
+    font-size: 13px;
+}
+
+@media (max-width: 800px) {
+    nav {
+        padding: 15px 5%;
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+
+    nav a {
+        margin-left: 0;
+        margin-right: 12px;
+        font-size: 12px;
+    }
+
+    .hero {
+        padding: 60px 6%;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .preview {
+        width: 100%;
+    }
+
+    section {
+        padding: 55px 6%;
+    }
+
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 520px) {
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    .btn-outline {
+        margin: 12px 0 0;
+    }
+
+    .dashboard {
+        padding: 15px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+    <div class="logo">Studora.</div>
+    <div>
+        <a href="#home">Home</a>
+        <a href="#features">Features</a>
+        <a href="#demo">Demo</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+    </div>
+</nav>
+
+<!-- HOME -->
+<header class="hero" id="home">
+    <div class="hero-content">
+        <div class="tag">🎓 Student Management Project</div>
+
+        <h1>Manage Students.<br>
+        <span>Make Learning Better.</span></h1>
+
+        <p>
+            A modern Student Management System designed to organize
+            student records, monitor attendance and simplify academic
+            management through one clean interface.
+        </p>
+
+        <a href="#demo" class="btn">Explore Dashboard →</a>
+        <a href="#features" class="btn btn-outline">View Features</a>
+    </div>
+
+    <div class="preview">
+        <h3>📊 Dashboard Overview</h3>
+
+        <div class="stat">
+            <strong id="totalCount">4</strong>
+            <small>Total Students</small>
+        </div>
+
+        <div class="stat">
+            <strong>92%</strong>
+            <small>Attendance</small>
+        </div>
+
+        <div class="stat">
+            <strong>08</strong>
+            <small>Subjects</small>
+        </div>
+
+        <div class="stat">
+            <strong>2026</strong>
+            <small>Academic Year</small>
+        </div>
+    </div>
+</header>
+
+<!-- FEATURES -->
+<section id="features">
+    <div class="section-title">
+        <h2>Powerful Features</h2>
+        <p>Everything organized in one student management interface.</p>
+    </div>
+
+    <div class="grid">
+        <div class="card">
+            <div class="icon">👨‍🎓</div>
+            <h3>Student Records</h3>
+            <p>Organize student names, IDs, email addresses and academic details.</p>
+        </div>
+
+        <div class="card">
+            <div class="icon">📅</div>
+            <h3>Attendance Tracking</h3>
+            <p>Keep track of attendance and monitor student participation.</p>
+        </div>
+
+        <div class="card">
+            <div class="icon">📚</div>
+            <h3>Academic Records</h3>
+            <p>Maintain subject details, marks and academic performance.</p>
+        </div>
+
+        <div class="card">
+            <div class="icon">🔍</div>
+            <h3>Quick Search</h3>
+            <p>Find student records quickly using the search functionality.</p>
+        </div>
+
+        <div class="card">
+            <div class="icon">📈</div>
+            <h3>Reports & Insights</h3>
+            <p>Present academic information through a clear dashboard layout.</p>
+        </div>
+
+        <div class="card">
+            <div class="icon">🖥️</div>
+            <h3>Simple Interface</h3>
+            <p>A clean, responsive design for desktop, tablet and mobile screens.</p>
+        </div>
+    </div>
+</section>
+
+<!-- INTERACTIVE DEMO -->
+<section class="demo" id="demo">
+    <div class="section-title">
+        <h2>Student Dashboard Demo</h2>
+        <p>Try searching and adding sample student records.</p>
+    </div>
+
+    <div class="dashboard">
+        <div class="dashboard-head">
+            <h3>Student Records</h3>
+            <input
+                type="search"
+                id="searchInput"
+                class="search"
+                placeholder="Search students..."
+                aria-label="Search students">
+        </div>
+
+        <form id="studentForm"
+              style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:22px;">
+
+            <input id="studentName"
+                   placeholder="Student name"
+                   required maxlength="60">
+
+            <input id="studentEmail"
+                   type="email"
+                   placeholder="Email address"
+                   required maxlength="100">
+
+            <button class="btn" type="submit">+ Add Student</button>
+        </form>
+
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Student ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+
+                <tbody id="studentTable">
+                    <tr>
+                        <td>STU101</td>
+                        <td>Aarav Sharma</td>
+                        <td>aarav@example.com</td>
+                        <td><span class="status">Active</span></td>
+                    </tr>
+
+                    <tr>
+                        <td>STU102</td>
+                        <td>Priya Patil</td>
+                        <td>priya@example.com</td>
+                        <td><span class="status">Active</span></td>
+                    </tr>
+
+                    <tr>
+                        <td>STU103</td>
+                        <td>Rahul Verma</td>
+                        <td>rahul@example.com</td>
+                        <td><span class="status">Active</span></td>
+                    </tr>
+
+                    <tr>
+                        <td>STU104</td>
+                        <td>Sneha Joshi</td>
+                        <td>sneha@example.com</td>
+                        <td><span class="status">Active</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <p id="message"
+           style="margin-top:15px;color:#68708a;font-size:13px;"
+           aria-live="polite">
+            Demo mode: records are stored only in this page.
+        </p>
+    </div>
+</section>
+
+<!-- TECHNOLOGIES -->
+<section class="tech">
+    <div class="section-title">
+        <h2>Technologies Used</h2>
+        <p>Technologies can be adapted to your actual project implementation.</p>
+    </div>
+
+    <div class="tech-list">
+        <div class="tech-item">HTML5</div>
+        <div class="tech-item">CSS3</div>
+        <div class="tech-item">JavaScript</div>
+        <div class="tech-item">Java Swing</div>
+        <div class="tech-item">MySQL</div>
+    </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+    <div class="about">
+        <div class="section-title">
+            <h2>About This Project</h2>
+        </div>
+
+        <p>
+            Studora is a student management project concept created to
+            demonstrate how student information can be presented in an
+            organized and user-friendly interface.
+        </p>
+
+        <p>
+            The portfolio highlights student records, attendance,
+            academic information and dashboard design. The displayed
+            records are sample data for demonstration purposes.
+        </p>
+    </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+    <h2>Let's Connect</h2>
+    <p>Interested in this project? Connect with me to learn more.</p>
+
+    <a class="btn" href="mailto:your-email@example.com">
+        Contact Me
+    </a>
+</section>
+
+<footer>
+    © 2026 Studora | Student Management System Project
+</footer>
+
+<script>
+const form = document.getElementById("studentForm");
+const nameInput = document.getElementById("studentName");
+const emailInput = document.getElementById("studentEmail");
+const table = document.getElementById("studentTable");
+const searchInput = document.getElementById("searchInput");
+const totalCount = document.getElementById("totalCount");
+const message = document.getElementById("message");
+
+let nextId = 105;
+
+function updateCount() {
+    totalCount.textContent = table.querySelectorAll("tr").length;
+}
+
+form.addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    const name = nameInput.value.trim();
+    const email = emailInput.value.trim();
+
+    if (!name || !email) return;
+
+    const row = document.createElement("tr");
+    const values = [
+        "STU" + nextId++,
+        name,
+        email
+    ];
+
+    values.forEach(function(value) {
+        const cell = document.createElement("td");
+        cell.textContent = value;
+        row.appendChild(cell);
+    });
+
+    const statusCell = document.createElement("td");
+    const status = document.createElement("span");
+    status.className = "status";
+    status.textContent = "Active";
+    statusCell.appendChild(status);
+    row.appendChild(statusCell);
+
+    table.appendChild(row);
+
+    form.reset();
+    updateCount();
+    filterStudents();
+
+    message.textContent =
+        "Student added to the demo. Refreshing the page will reset the sample data.";
+});
+
+function filterStudents() {
+    const query = searchInput.value.toLowerCase().trim();
+
+    table.querySelectorAll("tr").forEach(function(row) {
+        row.hidden = !row.textContent.toLowerCase().includes(query);
+    });
+}
+
+searchInput.addEventListener("input", filterStudents);
+
+updateCount();
+</script>
+
+</body>
+</html>
